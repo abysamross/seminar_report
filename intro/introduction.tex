@@ -1,0 +1,122 @@
+
+\chapter{Introduction}
+
+\section{Overview of Virtualization}
+Hardware resource abstraction and management have always been a major aim and challenge in
+electronic systems. With the advent of computers these tasks fell upon a huge piece of software
+called the Operating System. It became the responsibility of the OS to multiplex the resources
+among the different processes running in a system. An obvious illustration is that of CPU
+multiplexing, where the CPU is scheduled in time slices among various processes according to
+priority. The physical memory in a system as well is a resource. Memory also needs to be
+abstracted and suitable interfaces are to be provided for easy and efficient use. Traditionally
+this has been achieved through the concept of virtual memory coupled with paging or segmentation.
+\\
+With advancements in technology the capabilities of physical resources increased and cost
+decreased. Processors and memory became faster, smaller chips with more capacity became available.
+But these advancements didn't percolate naturally into better utilization of these resources.
+Often these resources were underutilized. In order to get better utility from these resources
+various options of sharing these resources at a larger granularity was explored. Thus came into
+existence the concept of virtualization.\\
+Virtualization increases the granularity of abstraction from individual resources to abstracting
+the entire set of hardware as a single unit or in other words virtualization abstracts the entire
+computer system. With this we could have more than one machine running on top of the existing
+computing hardware. These machines came to be called \textit{Virtual Machines} or VM. In other
+words with the increase in granularity of abstraction the unit of allocation to the abstraction
+increased from a process to an entire OS.\\
+The ringmaster who runs the show in a Virtual Machine is still the humongous piece of code called
+the OS. But traditionally OSes were designed to have ownership and control of the underlying
+hardware. Virtualization now created a separation between the hardware and the OS.They were now
+relegated to the status of a \textit{guest OS}. A single OS was no longer the sole owner and
+controller of the resources. The entire hardware had to be abstracted, interfaced and multiplexed
+among different OSes manning different VMs analogous to the way in which an OS enabled
+multiplexing of resources among different processes in a native system. This role was now taken up
+by a new, but no less hideous, software layer called the \textit{Virtual Machine Monitor} (VMM) or
+the \textit{Hypervisor}. That is now we have the hypervisor sitting on top of the hardware 
+directly and above it we have different VMs.\\
+The introduction of a new orchestrator, the Hypervisor, and relegation of a guest OS to a lesser
+privilege brought about new challenges. The guest OS in a VM had no longer complete control of the
+underlying resources to arbitrate efficiently among the processes running in it. But to the
+process local to a VM the guest OS was still the ringmaster who ran the show. Hence it became of
+paramount importance that the introduction of a software layer, the hypervisor, between the guest
+OS and the resources didn't break the equivalence view  i.e. a process running in a VM should see
+no or little difference in running on a native vs. virtualized system. At the same time we also
+had to ensure that every VM stayed within its allocated bounds and guest OS operations had enough
+efficiency. These requirements of hypervisor design are formally stated in Popek and Goldberg
+\citep{Popek1974}.The hypervisor can choose from among the various strategies like instruction
+interpretation, trap \& emulate, binary translation, para-virtualization, hardware assisted
+virtualization to provide the aforementioned requirements.\\
+Once such a hypervisor is available efficient resource utilization and management comes next in
+order to meet the original design principles of virtualization. Memory like other
+resources will also be apportioned to the different VMs. But it is not necessary that all  of the
+memory allocated to a VM will be in 100\% use all the time. This gives us an opportunity to
+reallocate this unused memory to other VMs in need. But its sharing and management is not as
+simple as that of a flexible resource like CPU and nor are the effects of differences in the
+amounts of memory available that easily visible \citep{Mortar2014}. The objective of this seminar is to get an understanding of the intricacies involved in this. 
+
+\section{Scope of the Seminar}
+The objective of this seminar is not to delve deep into the implementation of virtualization as a whole but rather to concentrate on understanding how memory virtualization is achieved,  
+\begin{itemize}
+\item Unnumbered and Numbered Lists
+\item Equations
+\item Defining short macros for frequently used symbols
+\item Bibliography
+\item Figures
+\item Tables
+\end{itemize}
+
+The normal procedure for compiling a \LaTeX\ document that contains
+bibliographic entries is to follow the following steps
+\begin{enumerate}
+\item \verb|pdflatex mainrep|
+\item \verb|bibtex mainrep|
+\item \verb|pdflatex mainrep|
+\item \verb|pdflatex mainrep|
+\end{enumerate}
+In the above example \verb|mainrep| is the main \LaTeX\ file.
+
+
+
+
+This is the first chapter, which resides in a directory (folder)
+intro. Each chapter can contain \verb|section|, \verb|subsection|
+and so on.
+
+
+
+
+Equations should be set in a separate mode.  For details on getting
+various types of aligned equations, consult the \AmS-\LaTeX\
+documentation \verb|amsldoc.pdf|. Simple equations are set as
+\begin{equation}
+\label{eq:sinx}
+\int \mathrm{d}x \; \cos x =  \sin x
+\end{equation}
+Equation~\eqref{eq:sinx} is the integral of the cosine
+function. Mathematical symbols must always be put inside \verb|$$|,
+when they appear outside a math environment (such as \verb|equation|,
+\verb|align|, \verb|gather|, etc).  The symbol ``ex'' must be written as
+$x$ and not as x.  
+
+Another commonly used construct for equations is the \verb|align|
+environment to align several equations along a vertical line. It is
+usually the $=$ sign across which the alignment is done.  The
+point of alignment for each equation is specified using the ampersand symbol 
+\begin{align}
+a &= b  \\
+a + e + f + g & = m + n + z \\
+x + 2 & = x^{3} + 3 x^{2} + 2 x + 5
+\end{align}
+
+\subsection{Commonly used Symbols}
+For mathematical symbols it is very convenient to define frequently
+used symbols as a short macro. For example if you are to be using the
+symbol $\eta_{\mathrm{s}}$ frequently it is convenient to define it in
+as:\\
+\verb|\newcommand{\etas}{\ensuremath{\eta_{\mathrm{s}}}}| \\
+in the preamble and to simply refer it to in the text as \etas\ or in
+a mathematical equation as $\etas = \eta \, ( 1 + \phi)$.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../mainrep"
+%%% End: 
