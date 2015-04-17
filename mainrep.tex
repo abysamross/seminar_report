@@ -9,8 +9,8 @@
 %% Selectively comment out sections that you want to be left out but
 %% maintaining the page numbers and other \ref
 \includeonly{%
-  intro/introduction,
-  lit/literature,
+  chapter1/introduction,
+  chapter2/background,
   expt/experimental,
   rnd/results,
 }
@@ -66,10 +66,10 @@ Memory like other computing resources can be considered a scarce enough commodit
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
-\include{intro/introduction}
-\include{lit/literature}
-\include{expt/experimental}
-\include{rnd/results}
+\include{chapter1/introduction}
+\include{chapter2/background}
+%\include{expt/experimental}
+%\include{rnd/results}
 
 \bibliography{mylit}
 
