@@ -41,18 +41,18 @@ paramount importance that the introduction of a software layer, the hypervisor, 
 OS and the resources didn't break the equivalence view  i.e. a process running in a VM should see
 no or little difference in running on a native vs. virtualized system. At the same time we also
 had to ensure that every VM stayed within its allocated bounds and guest OS operations had enough
-efficiency. These requirements of hypervisor design are formally stated in Popek and Goldberg
-\citep{Popek1974}.The hypervisor can choose from among the various strategies like instruction
-interpretation, trap \& emulate, binary translation, para-virtualization, hardware assisted
-virtualization to provide the aforementioned requirements.\\
+efficiency. These requirements of hypervisor design are formally stated in 
+\cite{popek1974formal}.The hypervisor can choose from among the various strategies like
+instruction interpretation, trap \& emulate, binary translation, para-virtualization, hardware
+assisted virtualization to provide the aforementioned requirements.\\
 Once such a hypervisor is available efficient resource utilization and management comes next in
 order to meet the original design principles of virtualization. Memory like other
 resources will also be apportioned to the different VMs. But it is not necessary that all  of the
 memory allocated to a VM will be in 100\% use all the time. This gives us an opportunity to
 reallocate this unused memory to other VMs in need. But its sharing and management is not as
 simple as that of a flexible resource like CPU and nor are the effects of differences in the
-amounts of memory available that easily visible \citep{Mortar2014}. The objective of this seminar
-is to get an understanding of the intricacies involved in this. 
+amounts of memory available that easily visible \citep{hwang2013mortar}. The objective of this
+seminar is to get an understanding of the intricacies involved in this. 
 
 \section{Scope of the Seminar}
 The objective of this seminar is not to delve deep into the implementation of virtualization as a

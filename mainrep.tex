@@ -11,9 +11,10 @@
 \includeonly{%
   chapter1/introduction,
   chapter2/background,
-  expt/experimental,
-  rnd/results,
-}
+}  
+%expt/experimental,
+%rnd/results,
+
 
 %%% Some commonly used packages (make sure your LaTeX installation
 %%% contains these packages, if not ask your senior to help installing
@@ -53,14 +54,26 @@
 \maketitle
 
 \begin{abstract}
-Memory like other computing resources can be considered a scarce enough commodity. Multiplexing and management of this memory among various stakeholders in native computing environments has been well taken care of. But when it comes to virtualized environments it adds another layer of abstraction. This calls for new techniques, for partitioning and arbitrating memory among different VMs, that doesn't change the OS's perspective of the scheme of things and requires minimal changes. While the techniques for partitioning memory among different VMs in a virtualized setting has almost got standardized, there are still differing views and different approaches to managing memory. The new layer of abstraction introduced by virtualization adds considerable complexity in estimating the needs and utilization of memory. One cannot retrofit one strategy suitable for a particular setting to another and expect to get a clear picture of memory related parameters. This seminar is to understand different techniques of memory virtualization and to gain some insight into some of the existing management strategies. 
+Memory like other computing resources can be considered a scarce enough commodity. Multiplexing
+and management of this memory among various stakeholders in native computing environments has been
+well taken care of. But when it comes to virtualized environments it adds another layer of
+abstraction. This calls for new techniques, for partitioning and arbitrating memory among
+different VMs, that doesn't change the OS's perspective of the scheme of things and requires
+minimal changes. While the techniques for partitioning memory among different VMs in a virtualized
+setting has almost got standardized, there are still differing views and different approaches to
+managing memory. The new layer of abstraction introduced by virtualization adds considerable
+complexity in estimating the needs and utilization of memory. One cannot retrofit one strategy
+suitable for a particular setting to another and expect to get a clear picture of memory related
+parameters. This seminar is to understand different techniques of memory virtualization and to
+gain some insight into some of the existing management strategies.
+ 
 \end{abstract}
 
 \pagenumbering{roman}
 \tableofcontents
 
 %\listoftables
-%\listoffigures
+\listoffigures
 
 %\cleardoublepage
 \setcounter{page}{1}
@@ -71,7 +84,7 @@ Memory like other computing resources can be considered a scarce enough commodit
 %\include{expt/experimental}
 %\include{rnd/results}
 
-\bibliography{mylit}
+\bibliography{mainrep}
 
 
 \end{document}
