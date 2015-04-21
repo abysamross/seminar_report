@@ -22,6 +22,7 @@
 
 
 \usepackage{booktabs}
+\usepackage{url}
 \graphicspath{{expt/}}
 
 
@@ -40,11 +41,19 @@
 \newcommand{\Figref}[1]{Figure~\ref{#1}}
 \newcommand{\Appref}[1]{Appendix~\ref{#1}}
 
+%Command for including image source
+\newcommand*{\captionsource}[3]{%
+  \caption[{#1}]{%
+	#2%
+    \\\hspace{\linewidth}%
+    \textbf{Source:} #3%
+	}%
+}
 
 
 \begin{document}
 \title{Study of Virtualization \& Management of Memory in Virtualized Systems}
-\author{Aby Sam Ross}
+\author{Aby Sam Ross\\143050093}
 %\date{\today}
 \degree{Master of Technology}
 \dept{Computer Science \& Engineering}
@@ -64,8 +73,7 @@ setting has almost got standardized, there are still differing views and differe
 managing memory. The new layer of abstraction introduced by virtualization adds considerable
 complexity in estimating the needs and utilization of memory. One cannot retrofit one strategy
 suitable for a particular setting to another and expect to get a clear picture of memory related
-parameters. This seminar is to understand different techniques of memory virtualization and to
-gain some insight into some of the existing management strategies.
+parameters. This seminar is to understand different techniques of memory virtualization and to gain some insight into some of the existing management strategies.
  
 \end{abstract}
 

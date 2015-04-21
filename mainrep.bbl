@@ -1,5 +1,5 @@
 %Merlin.mbs v4.21 2009-07-09.
-\begin{thebibliography}{2}%
+\begin{thebibliography}{3}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \ifx #1\undefined \expandafter \@firstoftwo
@@ -94,4 +94,13 @@
   \bibinfo {journal} {Communications of the ACM}\ }%
   \textbf{\bibinfo {volume} {17}},\ \bibinfo {pages} {412--421}%
   \bibAnnoteFile{NoStop}{popek1974formal}%
+\bibitem[{\citenamefont{Wikipedia}(2015)}]{wiki1}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibnamefont{Wikipedia}}}%
+  , \bibinfo {year} {2015},\ \enquote{\bibinfo {title} {General protection
+  fault --- wikipedia{,} the free encyclopedia},}\ \bibinfo {note} {[Online;
+  accessed 21-April-2015]},\
+  \url{http://en.wikipedia.org/w/index.php?title=General_protection_fault}%
+  \bibAnnoteFile{NoStop}{wiki1}%
 \end{thebibliography}%
