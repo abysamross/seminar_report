@@ -10,3 +10,7 @@
 \BOOKMARK [2][-]{subsection.3.2.1}{Shadow Paging}{section.3.2}% 10
 \BOOKMARK [2][-]{subsection.3.2.2}{Direct Paging}{section.3.2}% 11
 \BOOKMARK [2][-]{subsection.3.2.3}{Nested Page Tables}{section.3.2}% 12
+\BOOKMARK [1][-]{section.3.3}{Comparison of Memory Virtualization Techniques}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.4}{Optimizations to Memory Virtualization Techniques}{chapter.3}% 14
+\BOOKMARK [2][-]{subsection.3.4.1}{Combining Shadow Paging \046 Nested Page Table}{section.3.4}% 15
+\BOOKMARK [2][-]{subsection.3.4.2}{Reducing the number of Memory Accesses while using Nested Page Table}{section.3.4}% 16

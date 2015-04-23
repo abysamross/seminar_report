@@ -113,7 +113,14 @@ virtualization. This is a solution to the x86 architecture virtualization issue.
 can be read from \citet{force2000analysis}.\\
 The major change that this brings about is in the way in which guest page tables are updated.
 There is no shadow page table in this approach. Here also the machine frames containing the guest
-page tables are write protected by making them read only. A change to the guest page table are carried out by a VMCALL from the guets OS to the VMM. Subsequently the VMM VMCALL handler carries out the changes to the corresponding machine frames after validating them to ensure isolation. Hence the guest page tables contains direct \textit{virtual address} $\rightarrow$ \textit {machine address} mappings that are VMM validated. As it is the case with shadow paging mechanism normal page table reads happen without VMM intervention and page faults are handled by the guest OS by updating the page table entries through the VMM. Figure \ref{fig:para} illustrates this approach.
+page tables are write protected by making them read only. A change to the guest page table are
+carried out by a VMCALL from the guets OS to the VMM. Subsequently the VMM VMCALL handler carries
+out the changes to the corresponding machine frames after validating them to ensure isolation.
+Hence the guest page tables contains direct \textit{virtual address} $\rightarrow$ \textit{machine
+address} mappings that are VMM validated. As it is the case with shadow paging mechanism
+normal page table reads happen without VMM intervention and page faults are handled by the guest
+OS by updating the page table entries through the VMM. Figure \ref{fig:para} illustrates this
+approach.
 \begin{figure}[tbp]
   \begin{center}
     \includegraphics[width=0.7\textwidth]{images/paravirt}
@@ -123,8 +130,35 @@ page tables are write protected by making them read only. A change to the guest 
      \end{center}
 \end{figure}
 \subsection{Nested Page Tables} \label{nested}
-Extensions to the hardware in the form \textit{extended page tables or nested page tables} (EPT or NPT) enabled a new mechanism to achieve memory virtualization called \textit{hardware assisted MMU virtualization}. Contrary to shadow paging, nested paging removes the need for the VMM to supervise the guest OS page table operations once the nested pages are populated. Under nested paging both guest and the hypervisor have their own copy of the CR3 register. The guest OS maps virtual addresses to guest physical addresses and the Nested page tables (NPT) map guest physical addresses to machine frame addresses. The guest now is allowed to set up the guest page tables without any hindrance (i.e VMExits) by the VMM, except for getting a physical frame allocated (for the guest page table or any other guest physical page) which is still under the preview of the VMM. The VMM sets up the nested page table. A guest OS virtual memory reference, when nested page tables are set up, results in a 2-D page table walk - first in the guest page table and next in the nested page table - to get to the corresponding machine frame. Parts of virtual address is used to index into the guest page tables, as explain in \ref{native}, to obtain the guest physical address and using this guest physical address we do a similar indexing into the nested page table to obtain the machine frame address. There is a subtle issue here that may miss our eyes easily. While translating a virtual address we need to access machine frames holding the guest page table pages, so for each level of guest page table accessed we need to do a nested page table walk to reach the machine frame holding this page table page.\\
-If the guest page tables contain \textit{n levels} and the nested page table contains \textit{m levels}, then to resolve a virtual address to corresponding machine frame we require \[(n+1)\ *\ (m)\] memory accesses. The 1 in the previous expression stands for the final 2-D walk for getting the machine frame corresponding to the guest page table PTE entry of original virtual memory which we were trying to translate. The remaining \textit{n} are for the previous levels of the guest page tables. This is illustrated in figure \ref{fig:npt}.\\
+Extensions to the hardware in the form \textit{extended page tables or nested page tables} (EPT or
+NPT) enabled a new mechanism to achieve memory virtualization called \textit{hardware assisted MMU
+virtualization}. Contrary to shadow paging, nested paging removes the need for the VMM to
+supervise the guest OS page table operations once the nested pages are populated. Under nested
+paging both guest and the hypervisor have their own copy of the CR3 register. The guest OS maps
+virtual addresses to guest physical addresses and the Nested page tables (NPT) map guest physical
+addresses to machine frame addresses. The guest now is allowed to set up the guest page tables
+without any hindrance (i.e VMExits) by the VMM, except for getting a physical frame allocated (for
+the guest page table or any other guest physical page) which is still under the preview of the
+VMM. The VMM sets up the nested page table. A guest OS virtual memory reference, when nested page
+tables are set up, results in a 2-D page table walk - first in the guest page table and next in
+the nested page table - to get to the corresponding machine frame. Parts of virtual address is
+used to index into the guest page tables, as explain in \ref{native}, to obtain the guest physical
+address and using this guest physical address we do a similar indexing into the nested page table
+to obtain the machine frame address. There is a subtle issue here that may miss our eyes easily.
+While translating a virtual address we need to access machine frames holding the guest page table
+pages, so for each level of guest page table accessed we need to do a nested page table walk to
+reach the machine frame holding this page table page.\\
+If the guest page tables contain \textit{n levels} and the nested page table contains \textit{m
+levels}, then to resolve a virtual address to corresponding machine frame we require \[((n+1)\ *\
+m) + n\] memory accesses. For getting the machine frame address of a particular level of guest
+page table physical page we need to traverse \textbf{n} levels of nested page table. Once the
+machine frame is identified we need 1 memory access for reading it. These are the \textbf{n + 1}
+memory accesses in the previous expression. This is repeated for all levels of guest page table.
+Hence the \textbf{(n+1) * m}. Once you reach the machine frame which holds the last level of guest
+page table i.e. the PTE machine frame you can read the guest physical address of the original
+virtual address address and finally to obtain its machine address we need to traverse the nested
+page tables one last time. That is why the \textbf{n} term is added to the equation.
+This is illustrated in figure \ref{fig:npt}.\\
 \begin{figure}[tbp]
   \begin{center}
     \includegraphics[width=0.7\textwidth]{images/npt}
@@ -133,3 +167,82 @@ If the guest page tables contain \textit{n levels} and the nested page table con
     \label{fig:npt}
      \end{center}
 \end{figure}
+
+\section{Comparison of Memory Virtualization Techniques}
+Following table compares the different memory virtualization techniques.
+\begin{table}[!htbp]
+  \begin{center}
+    \caption{Comparing Memory Virtualization Techniques.}
+    \label{tab:compare}
+    \begin{tabular}{p{3cm} p{5cm} p{5cm}}
+      \toprule 
+      Technique & Advantage & Disadvantage \\
+      \midrule
+      Shadow Paging & Software approach, no changes to guest OS  & Frequent costly VMExits for each guest page table updation.\\
+      \midrule
+      Direct Paging &  No VMExits & Requires changes to the guest OS.\\
+      \midrule
+      Nested Page Tables & Hardware assisted approach, No VMExits, No changes to guest OS. & More number of memory for a virtual memory translation. About 6 times more. \\
+      \bottomrule \\
+    \end{tabular}
+  \end{center}
+\end{table}
+\section{Optimizations to Memory Virtualization Techniques}
+Shadow Paging and Nested Page Tables are two approaches that doesn't require changes to the guest
+OS. The solution approach they take, though seems similar, are independent of each other. If a 
+process running in the guest OS is experiencing large number of page faults then shadow paging is
+going to degrade the performance because of frequent VMExits required to synchronize the guest and
+shadow page tables (refer \ref{sp}). Hence shadow paging will prove to be a bad memory
+virtualization technique for such a process. Now consider another scenario where a process is
+experiencing large number of TLB misses but its pages are still in memory i.e. it has few page
+faults, then resolving their machine address by doing a 2-D page table walk in nested paging
+mechanism is going to degrade its performance due to increased number of memory accesses (refer
+\ref{nested}). For this process nested paging proves to be a bad choice of memory virtualization
+technique.
+\subsection{Combining Shadow Paging \& Nested Page Table}
+Neither of the two strategies is a clear winner all the time for different mix of processes
+possible in a VM. Hence in order to get the best of these two techniques \citet{wang2011selective}
+proposes a dynamic switching mechanism that switches between the shadow paging and nested paging
+based on memory access behaviour of the VMs and they call it the \textit{Dynamic Switching Paging}
+or DSP. Their solution approach is as follows:
+\begin{itemize}
+\item Determine page fault frequency and TLB miss frequency measured as the number of page faults
+and the number of TLB misses per thousand retired (finished) instructions.
+\item Determine system dependent upper and lower thresholds for page faults frequency \& TLB miss
+frequency.
+\item If one metric is beyond its upper threshold \& the other is well within within its threshold
+limits, then switch to the technique/mode that is the most suitable for the metric that is within
+its limits.
+\begin{itemize}
+\item ``If the TLB miss frequency is higher than the TLB miss upper-bound threshold and the page
+fault frequency is lower than 80 percent of the page fault upper-bound threshold, switch from''
+nested page table mode to shadow page table mode or stay in shadow page table mode if already in
+it.
+\item ``If the page fault frequency is higher than the page fault upper-bound threshold and the
+TLB miss frequency is lower than 80 percent of the TLB miss upper-bound threshold, switch from''
+shadow paging mode to nested page table mode or stay in nested page table mode if already in it.  
+\end{itemize}
+\item If both metrics are below their lower threshold limits then remain in the current mode. 
+\item If both metrics are above their upper threshold values or within their threshold limits find
+out the relative penalty between them.
+\item Calculate the relative penalty as the P-to-T ratio. \[P-to-T ratio\ =\ \frac{Page\ Fault\ 
+Frequency}{TLB\ Miss\ Frequency}\]
+\item P-to-T ratio is used along with a running average of recent P-to-T ratios called historic P-
+o-T ratios.
+\item If either of historic TLB miss frequency or current TLB miss frequency is zero then switch
+from shadow paging to nested page tables without estimating either historic or current P-to-T
+ratio. This avoids divide by zero errors.
+\item If both historic and latest P-to-T ratio are above P-to-T ratio threshold upper bound switch
+from shadow paging to nested page tables or stay in nested page tables if already in it.
+\item If both historic and latest P-to-T ratio are lower than P-to-T ratio threshold lower bound
+switch from nested page tables to shadow paging or stay in shadow paging mode if already in it.
+\item If both historic and latest P-to-T ratio are within the P-to-T ratio threshold's lower \&
+upper bounds stay in current mode.
+\item If historic and latest P-to-T ratio falls into different threshold intervals, a clear trend
+cannot be estimated and hence it is better to stay back in current mode.     
+\end{itemize}
+Through experimentations they claim that DSP is capable of matching the performance of the better
+among shadow paging and nested page tables, though they do not explain clearly how they attributed
+the performance degradation of particular processes to the memory virtualization technique used.
+\subsection{Reducing the number of Memory Accesses while using Nested Page Table}     
++

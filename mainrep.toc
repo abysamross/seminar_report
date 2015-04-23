@@ -10,3 +10,7 @@
 \contentsline {subsection}{\numberline {3.2.1}Shadow Paging}{12}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Direct Paging}{15}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Nested Page Tables}{15}{subsection.3.2.3}
+\contentsline {section}{\numberline {3.3}Comparison of Memory Virtualization Techniques}{17}{section.3.3}
+\contentsline {section}{\numberline {3.4}Optimizations to Memory Virtualization Techniques}{18}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Combining Shadow Paging \& Nested Page Table}{18}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Reducing the number of Memory Accesses while using Nested Page Table}{20}{subsection.3.4.2}

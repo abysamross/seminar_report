@@ -1,5 +1,5 @@
 %Merlin.mbs v4.21 2009-07-09.
-\begin{thebibliography}{7}%
+\begin{thebibliography}{8}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \ifx #1\undefined \expandafter \@firstoftwo
@@ -138,6 +138,23 @@
   \bibinfo {journal} {ACM SIGOPS Operating Systems Review}\ }%
   \textbf{\bibinfo {volume} {36}},\ \bibinfo {pages} {181--194}%
   \bibAnnoteFile{NoStop}{waldspurger2002memory}%
+\bibitem[{\citenamefont{Wang}\ \emph{et~al.}(2011)\citenamefont{Wang},
+  \citenamefont{Zang}, \citenamefont{Wang}, \citenamefont{Luo},\ and\
+  \citenamefont{Li}}]{wang2011selective}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibnamefont{Wang}, \bibfnamefont{Xiaolin}}, \bibinfo
+  {author} {\bibfnamefont{Jiarui}\ \bibnamefont{Zang}}, \bibinfo {author}
+  {\bibfnamefont{Zhenlin}\ \bibnamefont{Wang}}, \bibinfo {author}
+  {\bibfnamefont{Yingwei}\ \bibnamefont{Luo}},\ and\ \bibinfo {author}
+  {\bibfnamefont{Xiaoming}\ \bibnamefont{Li}}}%
+  , \bibinfo {year} {2011},\ \bibfield{title}{%
+  \enquote{\bibinfo {title} {Selective hardware/software memory
+  virtualization},}\ }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {ACM SIGPLAN Notices}\ }%
+  \textbf{\bibinfo {volume} {46}},\ \bibinfo {pages} {217--226}%
+  \bibAnnoteFile{NoStop}{wang2011selective}%
 \bibitem[{\citenamefont{Wikipedia}(2015)}]{wiki1}%
   \BibitemOpen
   \bibfield{author}{%
