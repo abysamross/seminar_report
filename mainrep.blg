@@ -4,6 +4,7 @@ The top-level auxiliary file: mainrep.aux
 The style file: iitbauthyr.bst
 A level-1 auxiliary file: chapter1/introduction.aux
 A level-1 auxiliary file: chapter2/background.aux
+A level-1 auxiliary file: chapter3/techniques.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -11,50 +12,51 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: mainrep.bib
-Warning--I didn't find a database entry for "Popek1974"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Merlin.mbs v4.21 2009-07-09. 
+Warning--missing journal in force2000analysis
 Warning--empty chapter and pages in hwang2013mortar
-You've used 3 entries,
+Warning--empty chapter and pages in salomie2013application
+You've used 7 entries,
             4548 wiz_defined-function locations,
-            889 strings with 8306 characters,
-and the built_in function-call counts, 3063 in all, are:
-= -- 198
-> -- 71
-< -- 7
-+ -- 24
-- -- 21
-* -- 432
-:= -- 331
-add.period$ -- 6
-call.type$ -- 3
-change.case$ -- 23
-chr.to.int$ -- 3
-cite$ -- 7
-duplicate$ -- 281
-empty$ -- 231
-format.name$ -- 41
-if$ -- 524
+            910 strings with 8925 characters,
+and the built_in function-call counts, 6747 in all, are:
+= -- 441
+> -- 153
+< -- 15
++ -- 52
+- -- 45
+* -- 916
+:= -- 746
+add.period$ -- 13
+call.type$ -- 7
+change.case$ -- 50
+chr.to.int$ -- 7
+cite$ -- 17
+duplicate$ -- 645
+empty$ -- 548
+format.name$ -- 87
+if$ -- 1202
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 42
-newline$ -- 91
-num.names$ -- 12
-pop$ -- 117
+missing$ -- 100
+newline$ -- 121
+num.names$ -- 28
+pop$ -- 285
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 43
 quote$ -- 2
-skip$ -- 104
+skip$ -- 241
 stack$ -- 0
-substring$ -- 70
-swap$ -- 240
-text.length$ -- 5
+substring$ -- 178
+swap$ -- 528
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 34
-warning$ -- 1
-while$ -- 12
+type$ -- 76
+warning$ -- 3
+while$ -- 29
 width$ -- 0
-write$ -- 107
-(There were 2 warnings)
+write$ -- 155
+(There were 3 warnings)

@@ -11,6 +11,7 @@
 \includeonly{%
   chapter1/introduction,
   chapter2/background,
+  chapter3/techniques,
 }  
 %expt/experimental,
 %rnd/results,
@@ -41,15 +42,18 @@
 \newcommand{\Figref}[1]{Figure~\ref{#1}}
 \newcommand{\Appref}[1]{Appendix~\ref{#1}}
 
+\def\myurl{\hfil\penalty100 \hfilneg\hbox}
+
 %Command for including image source
-\newcommand*{\captionsource}[3]{%
+\newcommand{\captionsource}[3]{%
   \caption[{#1}]{%
 	#2%
     \\\hspace{\linewidth}%
-    \textbf{Source:} #3%
+   	%\textbf{Source:}\hspace{2pt}%
+    \myurl{#3}%
+	%#3	
 	}%
 }
-
 
 \begin{document}
 \title{Study of Virtualization \& Management of Memory in Virtualized Systems}
@@ -80,16 +84,17 @@ parameters. This seminar is to understand different techniques of memory virtual
 \pagenumbering{roman}
 \tableofcontents
 
-%\listoftables
+\listoftables
 \listoffigures
 
 %\cleardoublepage
+\clearpage
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
 \include{chapter1/introduction}
 \include{chapter2/background}
-%\include{expt/experimental}
+\include{chapter3/techniques}
 %\include{rnd/results}
 
 \bibliography{mainrep}

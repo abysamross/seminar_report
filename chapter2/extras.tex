@@ -1,0 +1,33 @@
+\chapter{Extra info \& notes}
+
+1. change to openright in iitb.cls file 
+2. set cleardoublepage after listofmainrep.tex
+
+
+
+As mentioned in the introduction section the arrival of a new layer of software abstraction above
+the hardware relegated the native OS to the role of a guest OS. Especially on architectures like the
+x86 this posed a serious challenge. x86 architecture has this notion of different CPU privilege
+levels to provide protection. They are represented as \textit{protection rings}. There are 4 rings
+and each ring correspond to a privilege level, 0 being the highest privilege level and 3 the lowest.
+The OS in a normal setting runs on \textit{Ring 0} and user applications on \textit{Ring 3}.
+\textit{Rings 1 \& 2} are not used in general but was originally intended by
+Intel\textsuperscript{TM} for housing device drivers. They have more permissions than \textit{Ring
+3} but cannot access privileged instructions and any attempt to access such an instruction results
+in a general protection fault or \textit{GFP} \citep{wiki1}. This gives the OS complete control over
+all resources.\\
+The introduction of a hypervisor made it necessary to host it on \textit{Ring 0} and the guest OS
+had to be moved down to a lower privilege level. Now we would still want the guest OS to behave as
+if it is operating in \textit{Ring 0}. Normal instructions executed by the guest OS can go ahead
+without any hindrance analogous to the way a user mode instruction executes in a non-virtualized
+setup. But whenever the guest OS is trying to execute a privileged instruction the the hypervisor
+should somehow translate/emulate the effects of those privileged instructions as the guest OS longer
+has enough privileges to execute them on its own. This in turn means that there should be ways for
+the hypervisor to know when a guest OS is trying to execute a privileged instruction. Normally this
+is ensured because as the guest OS now has lower privileges trying to execute the privileged
+instruction causes a general protection fault.\\
+But there is a subtle issue here. Not all privileged instructions behave the same way when executed
+from a non-privileged mode. Certain privileged instructions when executed from a non-privileged mode
+does not cause a general protection fault and instead is replaced with a \textit{noop}. Hence the
+hypervisor cannot translate/emulate these instructions for the guest OS. This was resolved by moving
+the guest OS to \textit{Ring 1} where all privileged instructions generate a trap.

@@ -53,6 +53,7 @@
 \ProcessOptions
 
 \LoadClass[12pt,a4paper,openright]{report}
+%\LoadClass[12pt,a4paper,openany]{report}
 \RequirePackage{fancyhdr}
 
 %%% Other packages
@@ -72,6 +73,7 @@
 \usepackage{amsmath}
 \usepackage[varg]{txfonts}
 \usepackage{graphicx}
+\usepackage{url}
 \newcommand{\putiitblogo}{\includegraphics[width=10em]{iitb-black}}
 
 %%%% Page layout

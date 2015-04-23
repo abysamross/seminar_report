@@ -1,6 +1,12 @@
-\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Overview of Virtualization}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}Scope of the Seminar}{5}{section.1.2}
-\contentsline {chapter}{\numberline {2}Background}{7}{chapter.2}
-\contentsline {section}{\numberline {2.1}Memory Management in Native Systems}{7}{section.2.1}
-\contentsline {section}{\numberline {2.2}Challenges to Virtualizing Memory}{9}{section.2.2}
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Overview of Virtualization}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Scope of the Seminar}{3}{section.1.2}
+\contentsline {chapter}{\numberline {2}Background}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Memory Management in Native Systems}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Challenges to Virtualizing Memory}{7}{section.2.2}
+\contentsline {chapter}{\numberline {3}Memory Virtualization}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Physical Memory Allocation Model in Virtualized Systems}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}Techniques of Virtualizing the MMU}{12}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Shadow Paging}{12}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Direct Paging}{15}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Nested Page Tables}{15}{subsection.3.2.3}

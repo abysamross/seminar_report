@@ -1,0 +1,135 @@
+\chapter{Memory Virtualization}
+
+\section{Physical Memory Allocation Model in Virtualized Systems} \label{model}
+Since within a VM the guest OS provides its application the virtual memory abstraction and
+processes running in the guest OS share what the guest OS perceives as the physical memory, the
+guest OS is allowed to maintain the mapping of virtual addresses to what it perceives as its
+physical memory. But as explained earlier the guest OS is tricked into believing that it is
+managing a real contiguous physical memory just as the way in normal virtual memory scenario a
+process is tricked by the OS into believing that it is loaded on and executing from physically
+contiguous machine memory.\\
+Hence the guest OS's perception of physical memory is actually a pseudo-contiguous-physical memory
+abstraction provided by the VMM. As per common virtualization terminology it is called
+\textit{guest physical frames} and a corresponding page number is called \textit{Guest Physical
+Frame Number} or GPFN. And the corresponding original machine frame number backing a GPFN is
+termed machine frame number or MFN. Thus the guest OS page page tables contains the \textit{virtual address} $\rightarrow$ \textit{guest physical address} mapping also abbreviated as V $\rightarrow$ P mapping and the VMM should contain a \textit{guest physical address} $\rightarrow$ \textit{machine address} mapping often abbreviated as P $\rightarrow$ M. The P $\rightarrow$ M mapping should be maintained from the time a VM is created and should be updated every time a change occurs to the allocation of machine frames to a VM. This is illustrated in figure \ref{fig:allocmodel}.
+
+\begin{figure}[tbp]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{images/allocmodel}
+        	%\caption[Page Table Illustration]{Illustration of \textit{VA} $\rightarrow$ \textit{PA} address translation.}
+    		\captionsource{Virtualized Physical Memory Allocation Model}{Physical memory allocation model in virtualized systems.}%
+    		{\url{images.anandtech.com/reviews/it/2008/virtualization-nuts-bolts/Shadowpt.gif}}  
+    \label{fig:allocmodel}
+     \end{center}
+\end{figure}
+
+\section{Techniques of Virtualizing the MMU} \label{techniques}
+This section discusses how the hypervisor defines ways for the guest OS to access the actual
+machine frames through the MMU functionalities provided by it.\\
+We know that the guest OS maintains page table related information for every process running in a
+VM and also that the guest OS operates on pseudo physical pages or GPFNs. Memory references by
+processes running in a VM  requires translation of virtual addresses into machine addresses via
+hardware MMU operations such as page table walk. The page table walk itself needs actual machine
+frames addresses to get to the different levels of page table as discussed in \ref{native}. But as
+discussed in \ref{challenges} the guest OS cannot be given unrestricted direct access to the
+machine frames holding the page table pages to ensure VM isolation. This means that the guest OS
+access to the actual MMU (or its functionalities) in the VMM, like CR3 access, changes to page
+table entries need to be supervised by the VMM.\\
+Table \ref{tab:tech} lists the existing methodologies of virtualizing MMU.
+\begin{table}[tbp]
+  \begin{center}
+    \caption{MMU virtualization techniques.}
+    \label{tab:tech}
+    \begin{tabular}{ll}
+      \toprule 
+      Technique & Description \\
+      \midrule
+      Shadow Paging & Software approach\\
+      Direct Paging &  Para-virtualization approach\\
+      Nested Page Tables & Hardware assisted approach\\
+      \bottomrule \\
+    \end{tabular}
+  \end{center}
+\end{table}
+\subsection{Shadow Paging} \label{sp}
+Shadow paging mechanism is a software MMU virtualization mechanism.
+The access to CR3 is by default protected by design paradigms of virtualization which pushed the
+guest OS to lower privilege levels than the hypervisor. The machine frames that contain the
+different page table levels are protected by making them write protected. And for each
+process in a VM, just like a guest OS maintains a page table, the hypervisor also maintains a page
+table called the \textit{Shadow Page Table}. The shadow page table is part of a plan to easily get
+the direct the V $\rightarrow$ M mapping instead of going through \textit{V} $\rightarrow$
+\textit{P} and then \textit{P} $\rightarrow$ \textit{M} as mentioned in \ref{model}. Ideally every
+virtual address that is translated to corresponding guest physical page address in the guest OS
+should be translated to the corresponding machine frame address via P $\rightarrow$ M in the VMM.
+This applies to guest physical page addresses that correspond to the pages of the guest OS page
+table as well. But there is a subtle drawback to this approach. To translate a virtual address we
+know that the guest OS needs to access the page table whose base address is stored in the CR3.
+Assuming we have access to the CR3, for the time being, can we go ahead and directly access the
+guest page table? No, because what the guest OS have is only the guest physical page address of
+the the page table base. What we need is the address of the machine frame that holds this guest
+physical page. And in order to access it we need to do a translation using the P $\rightarrow$ M
+mappings. This needs to be repeated for the base address of every level of the page table.\\
+In order to alleviate this overhead we make use of the same P $\rightarrow$ M mappings maintained
+by the VMM for a VM to create shadow page tables for all process that run in that VM. And in
+the shadow page tables we maintain the direct V $\rightarrow$ M mappings. Thus every virtual
+address access by a process in a VM can now go through the corresponding shadow page table in the
+VMM saving on the number of memory accesses and the corresponding latency. Figure
+\ref{fig:shadowpagetables} illustrates this.\\
+\begin{figure}[tbp]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{images/shadowpagetables}
+        	%\caption[Page Table Illustration]{Illustration of \textit{VA} $\rightarrow$ \textit{PA} address translation.}
+        	\captionsource{Shadow Page Table Illustration}{Shadow Page Table Illustration.}{\url{corensic.files.wordpress.com/2011/12/shadowpagetables.png}}  
+    \label{fig:shadowpagetables}
+     \end{center}
+\end{figure}
+To pull off this trick the guest OS's CR3 is virtualized and guest OS access to the CR3 is to be
+prevented by a general protection fault (GPF) \citep{wiki1}. The VMM should load the CR3 with the
+base address of the shadow page table rather than with the base of guest OS page table. Virtual
+memory access that reads or writes already mapped frames can go ahead via the shadow page table
+unhindered. When a page fault occurs the VMM checks if the guest page table has valid entries for
+the faluting address, if that is the case then fault occurred because the VMM had moved the
+machine frame corresponding to the faulting address to its swap space. This type of fault should
+be hidden from the guest OS as such a fault would not have occurred if the guest OS was running on
+a native system. The VMM now swaps in the contents of the faulting address into machine memory,
+updates the P $\rightarrow$ M mapping to reflect this and the updates the corresponding shadow
+page table. On the other hand if the fault occurred because the guest page table did not have
+valid mappings for this virtual address, the VMM transfers control to the trap handler of the
+guest indicating a page fault. The guest OS will then issues I/O requests to effect a page-in
+operation, which may or may not cause a dirty page swap out. These requests are in fact serviced
+by the VMM as they are privileged instructions. Once the guest physical page (and the machine
+frame backing it is) is available the guest OS issues instructions to the modify the guest page
+tables \citep{smith2005virtual}. This causes an exception called \textbf{VMExit} as the frames
+containing guest page tables are write protected from the guest OS. The VMM now updates the guest
+page table and the mappings in the shadow page table before returning control back to the guest.
+This is done to ensure that the shadow page table is in sync with the guest page table.  
+\subsection{Direct Paging} \label{para}
+Direct Paging uses an approach called \textit{Para-Virtualization} in which the guest OS
+is made aware of being virtualized. Guest OS is modified as a part of the MMU virtualization. This
+approach makes use of the \textbf{VMCALL} or \textit{hypercall} API provided by para-
+virtualization. This is a solution to the x86 architecture virtualization issue. More
+can be read from \citet{force2000analysis}.\\
+The major change that this brings about is in the way in which guest page tables are updated.
+There is no shadow page table in this approach. Here also the machine frames containing the guest
+page tables are write protected by making them read only. A change to the guest page table are carried out by a VMCALL from the guets OS to the VMM. Subsequently the VMM VMCALL handler carries out the changes to the corresponding machine frames after validating them to ensure isolation. Hence the guest page tables contains direct \textit{virtual address} $\rightarrow$ \textit {machine address} mappings that are VMM validated. As it is the case with shadow paging mechanism normal page table reads happen without VMM intervention and page faults are handled by the guest OS by updating the page table entries through the VMM. Figure \ref{fig:para} illustrates this approach.
+\begin{figure}[tbp]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{images/paravirt}
+        	%\caption[Page Table Illustration]{Illustration of \textit{VA} $\rightarrow$ \textit{PA} address translation.}
+        	\captionsource{Direct Mapping Illustration}{Direct Mapping Illustration.}{\url{image.slidesharecdn.com/overview-of-xen-30627/95/overview-of-xen-30-12-728.jpg}}  
+    \label{fig:para}
+     \end{center}
+\end{figure}
+\subsection{Nested Page Tables} \label{nested}
+Extensions to the hardware in the form \textit{extended page tables or nested page tables} (EPT or NPT) enabled a new mechanism to achieve memory virtualization called \textit{hardware assisted MMU virtualization}. Contrary to shadow paging, nested paging removes the need for the VMM to supervise the guest OS page table operations once the nested pages are populated. Under nested paging both guest and the hypervisor have their own copy of the CR3 register. The guest OS maps virtual addresses to guest physical addresses and the Nested page tables (NPT) map guest physical addresses to machine frame addresses. The guest now is allowed to set up the guest page tables without any hindrance (i.e VMExits) by the VMM, except for getting a physical frame allocated (for the guest page table or any other guest physical page) which is still under the preview of the VMM. The VMM sets up the nested page table. A guest OS virtual memory reference, when nested page tables are set up, results in a 2-D page table walk - first in the guest page table and next in the nested page table - to get to the corresponding machine frame. Parts of virtual address is used to index into the guest page tables, as explain in \ref{native}, to obtain the guest physical address and using this guest physical address we do a similar indexing into the nested page table to obtain the machine frame address. There is a subtle issue here that may miss our eyes easily. While translating a virtual address we need to access machine frames holding the guest page table pages, so for each level of guest page table accessed we need to do a nested page table walk to reach the machine frame holding this page table page.\\
+If the guest page tables contain \textit{n levels} and the nested page table contains \textit{m levels}, then to resolve a virtual address to corresponding machine frame we require \[(n+1)\ *\ (m)\] memory accesses. The 1 in the previous expression stands for the final 2-D walk for getting the machine frame corresponding to the guest page table PTE entry of original virtual memory which we were trying to translate. The remaining \textit{n} are for the previous levels of the guest page tables. This is illustrated in figure \ref{fig:npt}.\\
+\begin{figure}[tbp]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{images/npt}
+        	%\caption[Page Table Illustration]{Illustration of \textit{VA} $\rightarrow$ \textit{PA} address translation.}
+        	\captionsource{Nested Page Table Illustration}{Nested Page Table Illustration.}{\url{cnblogs.com/snake-hand/p/3181631.html}}  
+    \label{fig:npt}
+     \end{center}
+\end{figure}
