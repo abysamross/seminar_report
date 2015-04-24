@@ -15,48 +15,51 @@ Database file #1: mainrep.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Merlin.mbs v4.21 2009-07-09. 
+Warning--can't use both volume and number fields in basu2013efficient
+Warning--empty chapter and pages in basu2013efficient
 Warning--missing journal in force2000analysis
+Warning--empty chapter and pages in gandhi2014efficient
 Warning--empty chapter and pages in hwang2013mortar
 Warning--empty chapter and pages in salomie2013application
-You've used 8 entries,
+You've used 10 entries,
             4548 wiz_defined-function locations,
-            917 strings with 9106 characters,
-and the built_in function-call counts, 8038 in all, are:
-= -- 519
-> -- 201
-< -- 19
-+ -- 68
-- -- 60
-* -- 1119
-:= -- 881
-add.period$ -- 15
-call.type$ -- 8
-change.case$ -- 60
-chr.to.int$ -- 8
-cite$ -- 19
-duplicate$ -- 762
-empty$ -- 649
-format.name$ -- 114
-if$ -- 1431
+            930 strings with 9574 characters,
+and the built_in function-call counts, 10896 in all, are:
+= -- 710
+> -- 288
+< -- 29
++ -- 97
+- -- 87
+* -- 1516
+:= -- 1171
+add.period$ -- 19
+call.type$ -- 10
+change.case$ -- 81
+chr.to.int$ -- 10
+cite$ -- 26
+duplicate$ -- 1038
+empty$ -- 877
+format.name$ -- 163
+if$ -- 1973
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 118
-newline$ -- 131
-num.names$ -- 32
-pop$ -- 327
+missing$ -- 159
+newline$ -- 143
+num.names$ -- 40
+pop$ -- 435
 preamble$ -- 1
-purify$ -- 52
+purify$ -- 69
 quote$ -- 2
-skip$ -- 278
+skip$ -- 381
 stack$ -- 0
-substring$ -- 216
-swap$ -- 634
-text.length$ -- 14
+substring$ -- 306
+swap$ -- 874
+text.length$ -- 24
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 90
-warning$ -- 3
-while$ -- 34
+type$ -- 117
+warning$ -- 6
+while$ -- 46
 width$ -- 0
-write$ -- 170
-(There were 3 warnings)
+write$ -- 195
+(There were 6 warnings)

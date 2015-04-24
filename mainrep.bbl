@@ -1,5 +1,5 @@
 %Merlin.mbs v4.21 2009-07-09.
-\begin{thebibliography}{8}%
+\begin{thebibliography}{10}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \ifx #1\undefined \expandafter \@firstoftwo
@@ -67,6 +67,21 @@
 \providecommand \EOS [0]{\spacefactor3000\relax}%
 \providecommand \BibitemShut [1]{\csname bibitem#1\endcsname}%
 %</preamble>
+\bibitem[{\citenamefont{Basu}\ \emph{et~al.}(2013)\citenamefont{Basu},
+  \citenamefont{Gandhi}, \citenamefont{Chang}, \citenamefont{Hill},\ and\
+  \citenamefont{Swift}}]{basu2013efficient}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibnamefont{Basu}, \bibfnamefont{Arkaprava}}, \bibinfo
+  {author} {\bibfnamefont{Jayneel}\ \bibnamefont{Gandhi}}, \bibinfo {author}
+  {\bibfnamefont{Jichuan}\ \bibnamefont{Chang}}, \bibinfo {author}
+  {\bibfnamefont{Mark~D}\ \bibnamefont{Hill}},\ and\ \bibinfo {author}
+  {\bibfnamefont{Michael~M}\ \bibnamefont{Swift}}}%
+  , \bibinfo {year} {2013},\ \enquote{\bibinfo {title} {Efficient virtual
+  memory for big memory servers},}\ in\ \emph{\bibinfo {booktitle} {ACM SIGARCH
+  Computer Architecture News}},\ Vol.~\bibinfo {volume} {41}\ (\bibinfo
+  {organization} {ACM})\ pp.\ \bibinfo {pages} {237--248}%
+  \bibAnnoteFile{NoStop}{basu2013efficient}%
 \bibitem[{\citenamefont{Force}(2000)}]{force2000analysis}%
   \BibitemOpen
   \bibfield{author}{%
@@ -74,12 +89,27 @@
   , \bibinfo {year} {2000},\ \enquote{\bibinfo {title} {Analysis of the intel
   pentium’s ability to support a secure virtual machine monitor},}\ %
   \bibAnnoteFile{NoStop}{force2000analysis}%
+\bibitem[{\citenamefont{Gandhi}\ \emph{et~al.}(2014)\citenamefont{Gandhi},
+  \citenamefont{Basu}, \citenamefont{Hill},\ and\
+  \citenamefont{Swift}}]{gandhi2014efficient}%
+  \BibitemOpen
+\bibfield{title}{%
+    }%
+  \bibfield{author}{%
+  \bibinfo {author} {\bibnamefont{Gandhi}, \bibfnamefont{Jayneel}}, \bibinfo
+  {author} {\bibfnamefont{Arkaprava}\ \bibnamefont{Basu}}, \bibinfo {author}
+  {\bibfnamefont{Mark~D}\ \bibnamefont{Hill}},\ and\ \bibinfo {author}
+  {\bibfnamefont{Michael~M}\ \bibnamefont{Swift}}}%
+  , \bibinfo {year} {2014},\ \enquote{\bibinfo {title} {Efficient memory
+  virtualization: Reducing dimensionality of nested page walks},}\ in\
+  \emph{\bibinfo {booktitle} {Microarchitecture (MICRO), 2014 47th Annual
+  IEEE/ACM International Symposium on}}\ (\bibinfo {organization} {IEEE})\ pp.\
+  \bibinfo {pages} {178--189}%
+  \bibAnnoteFile{NoStop}{gandhi2014efficient}%
 \bibitem[{\citenamefont{Hwang}\ \emph{et~al.}(2013)\citenamefont{Hwang},
   \citenamefont{Uppal}, \citenamefont{Wood},\ and\
   \citenamefont{Huang}}]{hwang2013mortar}%
   \BibitemOpen
-\bibfield{title}{%
-    }%
   \bibfield{author}{%
   \bibinfo {author} {\bibnamefont{Hwang}, \bibfnamefont{Jinho}}, \bibinfo
   {author} {\bibfnamefont{Ahsen~J}\ \bibnamefont{Uppal}}, \bibinfo {author}

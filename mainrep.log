@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.4.3)  23 APR 2015 22:11
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.4.3)  24 APR 2015 06:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -663,20 +663,20 @@ File: omstxr.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OMS/txr/m/n' in size <12> not available
 (Font)              Font shape `OMS/txsy/m/n' tried instead on input line 209.
- [18] [19]) [20]
-(./mainrep.bbl
-Missing character: There is no â in font txr!
-Missing character: There is no € in font txr!
-Missing character: There is no ™ in font txr!
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 103.
- [21
+ [18] [19] [20])
+[21] (./mainrep.bbl [22
 
 
 ]
+Missing character: There is no â in font txr!
+Missing character: There is no € in font txr!
+Missing character: There is no ™ in font txr!
+ [23])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 103.
+ [24]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 103.
- (./mainrep.aux (./chapter1/introduction.aux)
-(./chapter2/background.aux) (./chapter3/techniques.aux))
+ (./mainrep.aux (./chapter1/introduction.aux) (./chapter2/background.aux) (./ch
+apter3/techniques.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 103.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 103.
 Package rerunfilecheck Info: File `mainrep.out' has not changed.
@@ -684,13 +684,13 @@ Package rerunfilecheck Info: File `mainrep.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 103.
  ) 
 Here is how much of TeX's memory you used:
- 7360 strings out of 494985
- 102927 string characters out of 6180357
- 184639 words of memory out of 5000000
- 10330 multiletter control sequences out of 15000+600000
+ 7373 strings out of 494985
+ 103186 string characters out of 6180357
+ 184773 words of memory out of 5000000
+ 10336 multiletter control sequences out of 15000+600000
  39466 words of font info for 85 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 36i,11n,49p,646b,448s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,11n,49p,1033b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1
@@ -702,10 +702,10 @@ xmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on mainrep.pdf (28 pages, 395256 bytes).
+Output written on mainrep.pdf (31 pages, 400883 bytes).
 PDF statistics:
- 352 PDF objects out of 1000 (max. 8388607)
- 294 compressed objects within 3 object streams
- 62 named destinations out of 1000 (max. 500000)
+ 376 PDF objects out of 1000 (max. 8388607)
+ 314 compressed objects within 4 object streams
+ 67 named destinations out of 1000 (max. 500000)
  159 words of extra memory for PDF output out of 10000 (max. 10000000)
 

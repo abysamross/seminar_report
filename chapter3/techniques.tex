@@ -245,4 +245,35 @@ Through experimentations they claim that DSP is capable of matching the performa
 among shadow paging and nested page tables, though they do not explain clearly how they attributed
 the performance degradation of particular processes to the memory virtualization technique used.
 \subsection{Reducing the number of Memory Accesses while using Nested Page Table}     
-+
+The advantages of nested Page table technique make it a good memory virtualization technique. But
+its drawback of large number of memory access for a single virtual address translation is too much
+of a cost for processes having poor memory access locality. \citet{gandhi2014efficient} proposes
+new hardware that makes use of \textit{Direct Segments} both in the guest OS and the hypervisor to
+reduce the overhead of virtualized address translation. The concept of direct segments is
+explained in \citet{basu2013efficient}. They incorporate the idea presented there to introduce
+virtualized direct segments that logically reside on the TLB miss path of the guest OS and on the
+address translation mechanism used in the VMM. Direct segments maps a processes virtual address
+space with segments and with paging. This enables large parts of contiguous virtual address space
+to be mapped to contiguous physical addresses with minimal hardware. And for portions that cannot
+be contiguously mapped direct segments fall back on normal paging. As with normal memory
+management with \textit{egements} rather than pages, in native systems, which we did not discuss
+in section \ref{introduction}, direct segments are also managed with 3 registers: BASE, LIMIT and
+OFFSET. As we know a virtual address V within a segment ($BASE\ \leq\ V\ \leq LIMIT$) gets
+translated to physical address $V\ +\ OFFSET$. The contiguous address space required for the
+segment is obtained by mapping a large chunk of contiguous virtual addresses with the same
+permissions, which is called the \textit{primary region} abstraction in \citet{basu2013efficient}.  
+\\
+The different modes of operation that they propose are the following:
+\begin{itemize}
+\item \textit{Dual Direct} mode that uses direct segments both in the guest OS and VMM. It uses
+the direct segment registers both in the guest OS and VMM to translate directly from \textit{guest
+virtual address} $\rightarrow$ \textit{machine address}, thus bypassing both dimensions of
+virtualized address translation. 
+\item \textit{VMM Direct Mode} uses direct segments for the 2nd dimension of virtualized address
+translation i.e. \textit{guest physical address} $\rightarrow$ \textit{machine address}. Hence the
+guest OS can be left unmodified. Only the VMM needs modifications to support this mode.
+\item \textit{Guest Direct} mode limits the support of direct segments to the guest OS.
+\textit{guest virtual address} $\rightarrow$ \textit{guest physical address} translations now has
+zero overhead. VMM uses normal paging techniques to manage the actual machine memory. 
+\end{itemize} 
+In effect they flatten one or two dimensions of the page walk based on the mode of operation. They also address the possibility of lack of contiguous guest physical memory needed to create a direct segment due to fragmentation using \textit{self ballooning}. Self ballooning uses \textit{ballooning} to remove the fragmented guest physical memory form use and \textit{hotplug} it back as contiguous guest physical memory that can be used to create guest direct segments. They also talk about plugging gaps caused by faulty pages in the contiguous direct segments by using \textit{escape filters}. Escape filters are nothing but making use of conventional paging to map holes in the physical address that break the addresses' physical contiguity. Hence while using direct segments and translating addresses, along with the segment register we need too check the hardware that implements the filter to \textit{escape} the faulty page from segment based translation to paging.     
