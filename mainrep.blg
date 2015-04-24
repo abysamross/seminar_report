@@ -5,6 +5,7 @@ The style file: iitbauthyr.bst
 A level-1 auxiliary file: chapter1/introduction.aux
 A level-1 auxiliary file: chapter2/background.aux
 A level-1 auxiliary file: chapter3/techniques.aux
+A level-1 auxiliary file: chapter4/management.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -21,45 +22,47 @@ Warning--missing journal in force2000analysis
 Warning--empty chapter and pages in gandhi2014efficient
 Warning--empty chapter and pages in hwang2013mortar
 Warning--empty chapter and pages in salomie2013application
-You've used 10 entries,
+Warning--can't use both volume and number fields in zhou2004dynamic
+Warning--empty chapter and pages in zhou2004dynamic
+You've used 13 entries,
             4548 wiz_defined-function locations,
-            930 strings with 9574 characters,
-and the built_in function-call counts, 10896 in all, are:
-= -- 710
-> -- 288
-< -- 29
-+ -- 97
-- -- 87
-* -- 1516
-:= -- 1171
-add.period$ -- 19
-call.type$ -- 10
-change.case$ -- 81
-chr.to.int$ -- 10
-cite$ -- 26
-duplicate$ -- 1038
-empty$ -- 877
-format.name$ -- 163
-if$ -- 1973
+            947 strings with 10056 characters,
+and the built_in function-call counts, 14332 in all, are:
+= -- 939
+> -- 396
+< -- 40
++ -- 135
+- -- 120
+* -- 2022
+:= -- 1532
+add.period$ -- 25
+call.type$ -- 13
+change.case$ -- 110
+chr.to.int$ -- 13
+cite$ -- 34
+duplicate$ -- 1360
+empty$ -- 1141
+format.name$ -- 226
+if$ -- 2597
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 159
-newline$ -- 143
-num.names$ -- 40
-pop$ -- 435
+missing$ -- 206
+newline$ -- 165
+num.names$ -- 52
+pop$ -- 558
 preamble$ -- 1
-purify$ -- 69
+purify$ -- 92
 quote$ -- 2
-skip$ -- 381
+skip$ -- 497
 stack$ -- 0
-substring$ -- 306
-swap$ -- 874
-text.length$ -- 24
+substring$ -- 400
+swap$ -- 1163
+text.length$ -- 34
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 117
-warning$ -- 6
-while$ -- 46
+type$ -- 155
+warning$ -- 8
+while$ -- 60
 width$ -- 0
-write$ -- 195
-(There were 6 warnings)
+write$ -- 233
+(There were 8 warnings)

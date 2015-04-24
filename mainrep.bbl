@@ -1,5 +1,5 @@
 %Merlin.mbs v4.21 2009-07-09.
-\begin{thebibliography}{10}%
+\begin{thebibliography}{13}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \ifx #1\undefined \expandafter \@firstoftwo
@@ -120,6 +120,16 @@
   the 4th annual Symposium on Cloud Computing}}\ (\bibinfo {organization}
   {ACM})\ p.~\bibinfo {pages} {30}%
   \bibAnnoteFile{NoStop}{hwang2013mortar}%
+\bibitem[{\citenamefont{Mishra}\ and\
+  \citenamefont{Kulkarni}(2015)}]{debapuru15}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibnamefont{Mishra}, \bibfnamefont{Debadatta}},\ and\
+  \bibinfo {author} {\bibfnamefont{Purushottam}\ \bibnamefont{Kulkarni}}}%
+  , \bibinfo {year} {2015},\ \enquote{\bibinfo {title} {A survey of memory
+  management techniques in virtualized systems},}\ \bibinfo {note} {Unpublished
+  paper}%
+  \bibAnnoteFile{NoStop}{debapuru15}%
 \bibitem[{\citenamefont{Popek}\ and\
   \citenamefont{Goldberg}(1974)}]{popek1974formal}%
   \BibitemOpen
@@ -194,4 +204,34 @@
   accessed 21-April-2015]},\
   \url{http://en.wikipedia.org/w/index.php?title=General_protection_fault}%
   \bibAnnoteFile{NoStop}{wiki1}%
+\bibitem[{\citenamefont{Zhao}\ \emph{et~al.}(2009)\citenamefont{Zhao},
+  \citenamefont{Wang},\ and\ \citenamefont{Luo}}]{zhao2009dynamic}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibnamefont{Zhao}, \bibfnamefont{Weiming}}, \bibinfo
+  {author} {\bibfnamefont{Zhenlin}\ \bibnamefont{Wang}},\ and\ \bibinfo
+  {author} {\bibfnamefont{Yingwei}\ \bibnamefont{Luo}}}%
+  , \bibinfo {year} {2009},\ \bibfield{title}{%
+  \enquote{\bibinfo {title} {Dynamic memory balancing for virtual machines},}\
+  }%
+  \bibfield{journal}{%
+  \bibinfo {journal} {ACM SIGOPS Operating Systems Review}\ }%
+  \textbf{\bibinfo {volume} {43}},\ \bibinfo {pages} {37--47}%
+  \bibAnnoteFile{NoStop}{zhao2009dynamic}%
+\bibitem[{\citenamefont{Zhou}\ \emph{et~al.}(2004)\citenamefont{Zhou},
+  \citenamefont{Pandey}, \citenamefont{Sundaresan}, \citenamefont{Raghuraman},
+  \citenamefont{Zhou},\ and\ \citenamefont{Kumar}}]{zhou2004dynamic}%
+  \BibitemOpen
+  \bibfield{author}{%
+  \bibinfo {author} {\bibnamefont{Zhou}, \bibfnamefont{Pin}}, \bibinfo {author}
+  {\bibfnamefont{Vivek}\ \bibnamefont{Pandey}}, \bibinfo {author}
+  {\bibfnamefont{Jagadeesan}\ \bibnamefont{Sundaresan}}, \bibinfo {author}
+  {\bibfnamefont{Anand}\ \bibnamefont{Raghuraman}}, \bibinfo {author}
+  {\bibfnamefont{Yuanyuan}\ \bibnamefont{Zhou}},\ and\ \bibinfo {author}
+  {\bibfnamefont{Sanjeev}\ \bibnamefont{Kumar}}}%
+  , \bibinfo {year} {2004},\ \enquote{\bibinfo {title} {Dynamic tracking of
+  page miss ratio curve for memory management},}\ in\ \emph{\bibinfo
+  {booktitle} {ACM SIGOPS Operating Systems Review}},\ Vol.~\bibinfo {volume}
+  {38}\ (\bibinfo {organization} {ACM})\ pp.\ \bibinfo {pages} {177--188}%
+  \bibAnnoteFile{NoStop}{zhou2004dynamic}%
 \end{thebibliography}%

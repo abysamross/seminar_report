@@ -1,5 +1,4 @@
 \chapter{Memory Virtualization}
-
 \section{Physical Memory Allocation Model in Virtualized Systems} \label{model}
 Since within a VM the guest OS provides its application the virtual memory abstraction and
 processes running in the guest OS share what the guest OS perceives as the physical memory, the
@@ -150,7 +149,8 @@ pages, so for each level of guest page table accessed we need to do a nested pag
 reach the machine frame holding this page table page.\\
 If the guest page tables contain \textit{n levels} and the nested page table contains \textit{m
 levels}, then to resolve a virtual address to corresponding machine frame we require \[((n+1)\ *\
-m) + n\] memory accesses. For getting the machine frame address of a particular level of guest
+m) + n\] memory accesses\citet{gandhi2014efficient}.
+For getting the machine frame address of a particular level of guest
 page table physical page we need to traverse \textbf{n} levels of nested page table. Once the
 machine frame is identified we need 1 memory access for reading it. These are the \textbf{n + 1}
 memory accesses in the previous expression. This is repeated for all levels of guest page table.

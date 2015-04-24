@@ -14,3 +14,13 @@
 \contentsline {section}{\numberline {3.4}Optimizations to Memory Virtualization Techniques}{18}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Combining Shadow Paging \& Nested Page Table}{18}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}Reducing the number of Memory Accesses while using Nested Page Table}{20}{subsection.3.4.2}
+\contentsline {chapter}{\numberline {4}Managing Virtualized Memory}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Techniques of Memory (Re)allocation}{24}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Demand Paging}{24}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Ballooning}{24}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Content based Page Sharing}{25}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Determining Memory Usage Statistics}{26}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Sampling based WSS estimation}{26}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Page Miss Ratio Curve based approach}{27}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Virtualized Memory Management for Applications that manage their own Memory}{28}{section.4.3}
+\contentsline {chapter}{\numberline {5}Conclusion}{31}{chapter.5}
